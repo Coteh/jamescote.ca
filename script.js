@@ -25,10 +25,13 @@
       window.scrollTo(0, 0);
     }, 1);
 
-    // Alternate method: Use AJAX to load the contents of an external file into a div based on URL fragment
-    // This will extract the region name from URL hash, and then load [region].html into the main #content div
-    // var region = location.hash.toString() || '#first';
-    // $('#content').load(region.slice(1) + '.html')
+    // For sections with "dynamic" class: Use AJAX to load the contents of an external file into the div based on URL fragment
+    // This will extract the region name from URL hash, and then load [region].html into the section div
+    var region = location.hash.toString() || '#first';
+    if ($(region).hasClass('dynamic') && !$(region).hasClass('loaded')) {
+      $(region).load(region.slice(1) + '.html');
+      $(region).addClass('loaded');
+    }
     
   });
   

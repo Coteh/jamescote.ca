@@ -95,6 +95,8 @@ html, #container, .inner { background-color:transparent;}
 html {
   background:url(background.jpg) center center no-repeat fixed;
   background-size:cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
 }
 body {
   max-width:800px;

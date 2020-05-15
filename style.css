@@ -9,15 +9,19 @@ html {
 body {
   font-size: 1.5em; /* currently ems cause chrome bug misinterpreting rems on body element */
   line-height: 1.6;
+  font-weight: 300;
   font-family: "Roboto", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #FFFFFF;
+}
+
+b {
+  font-weight: 800;
 }
 
 /**
  * Links
  */
 a {
-  font-weight: normal;
   text-decoration: none; 
   color:rgb(0, 162, 255);
 }

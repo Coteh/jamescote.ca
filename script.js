@@ -36,7 +36,7 @@
   });
 
   $('#hifi_fake').on('load', function() {
-    // $('#lofi_wrap').css('opacity', '0');
+    $('#lofi_wrap').css('opacity', '0');
   });
   
 })(jQuery);

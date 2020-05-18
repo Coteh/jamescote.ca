@@ -35,8 +35,8 @@
     
   });
 
-  $('#hifi-fake').on('load', function() {
-    $('#background_wrap').css('background-image', 'url(background.jpg)');
+  $('#hifi_fake').on('load', function() {
+    $('#lofi_wrap').css('opacity', '0');
   });
   
 })(jQuery);
@@ -54,10 +54,13 @@ fixBackgroundSizeCover = function (event) {
     bgImageRatio = bgImageWidth / bgImageHeight,
     windowSizeRatio = window.innerWidth / window.innerHeight;
 
+  var bgWraps = document.getElementsByClassName('background_wrap');
   if (bgImageRatio > windowSizeRatio) {
-    document.getElementById('background_wrap').style.backgroundSize = 'auto 100vh';
+    bgWraps[0].style.backgroundSize = 'auto 100vh';
+    bgWraps[1].style.backgroundSize = 'auto 100vh';
   } else {
-    document.getElementById('background_wrap').style.backgroundSize = '100vw auto';
+    bgWraps[0].style.backgroundSize = '100vw auto';
+    bgWraps[1].style.backgroundSize = '100vw auto';
   }
 };
 

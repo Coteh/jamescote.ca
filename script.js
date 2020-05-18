@@ -57,8 +57,24 @@ fixBackgroundSizeCover = function (event) {
   }
 };
 
+loadBetterQualityBackground = function () {
+  fetch("background.jpg")
+    .then((res) => {
+      return res.blob();
+    })
+    .then((res) => {
+      document.getElementById('background_wrap').style.backgroundImage = `url(${URL.createObjectURL(res)})`;
+    })
+    .catch((err) => {
+      console.error("Did not load the better background: ", err);
+    });
+};
+
 // Execute the fix function once upon load
 fixBackgroundSizeCover();
+
+// Execute the background load function also upon load
+loadBetterQualityBackground();
 
 // Execute the fix function everytime on window resize
 window.addEventListener('resize', fixBackgroundSizeCover);

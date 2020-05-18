@@ -100,7 +100,7 @@ html, #container, .inner { background-color:transparent;}
 /* https://stackoverflow.com/a/12770538 */
 /* https://stackoverflow.com/a/27918995 */
 /* Access Date: May 13, 2020 */
-#background_wrap {
+.background_wrap {
   background:url(background.jpg) center center no-repeat scroll;
   background-size: cover;
   z-index: -500;
@@ -109,6 +109,10 @@ html, #container, .inner { background-color:transparent;}
   left: 0;
   height: 100%;
   width: 100%;
+}
+#lofi_wrap {
+  background-image: url(background-lofi.jpg);
+  transition: opacity 1.0s;
 }
 body {
   max-width:800px;

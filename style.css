@@ -163,4 +163,88 @@ ul.main-menu li a.active {
   width: 80%;
 }
 
+.resume-preview {
+  float: right;
+  margin: 2em;
+}
+.resume-preview > a {
+  position: relative;
+}
+.resume-preview > a > img {
+  height: 250px;
+  border: 2px solid rgba(0,0,0,0);
+  transition: all 0.5s;
+}
+@media only screen and (max-width: 1024px) {
+  .resume-preview > a > img {
+    height: 150px;
+  }
+}
+.resume-preview > a > i {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 0.5em;
+  color: black;
+}
+.resume-preview > a:hover > img {
+  border: 2px solid yellow;
+}
+.resume-preview > a:hover > i {
+  color: grey;
+}
 
+/* Lightbox CSS */
+/* inspired by https://yossiabramov.com/blog/vanilla-js-lightbox */
+.lightbox {
+  position: fixed;
+  visibility: hidden;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: -1;
+  transition: all 0.15s ease-in;
+  /* background-color: blue; */
+}
+
+.lightbox.show {
+  visibility: visible;
+  background-color: rgba(0,0,0,0.85);
+  z-index: 1000;
+}
+
+.lightbox > .close {
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin: 2em;
+}
+
+.lightbox > .close > i {
+  font-size: 2em;
+  color: white;
+}
+
+.lightbox > .close > i:hover {
+  color: yellow;
+}
+
+.lightbox > .close > i:active,
+.lightbox > .close > i:focus {
+  color: grey;
+}
+
+.lightbox > .close:active,
+.lightbox > .close:focus {
+  outline: 0;
+  border: none;
+}
+
+.lightbox > object {
+  position: absolute;
+  top: 10%;
+  width: 100%;
+  height: 90%;
+  background-color: white;
+}

@@ -95,15 +95,15 @@ showResumePdf = function(clickSource) {
     document.location.href = "/resume.pdf";
   } else {
     showLightbox();
-  }
-  if (!resumeElementLoaded) {
-    const innerHTML = $(".lightbox").html();
-    // Dynamically load resume preview element so that resume pdf only loads when it's actually opened
-    // and to also fix an error message that comes up on Firefox after opening print preview due to Firefox's built-in pdf.js still loading pdf
-    $(".lightbox").load("resume.html", () => {
-      $(".lightbox").append(innerHTML);
-      resumeElementLoaded = true;
-    });
+    if (!resumeElementLoaded) {
+      const innerHTML = $(".lightbox").html();
+      // Dynamically load resume preview element so that resume pdf only loads when it's actually opened
+      // and to also fix an error message that comes up on Firefox after opening print preview due to Firefox's built-in pdf.js still loading pdf
+      $(".lightbox").load("resume.html", () => {
+        $(".lightbox").append(innerHTML);
+        resumeElementLoaded = true;
+      });
+    }
   }
   gtag('event', 'Opened Resume', {
     event_label: clickSource,

@@ -205,7 +205,6 @@ ul.main-menu li a.active {
   bottom: 0;
   z-index: -1;
   transition: all 0.15s ease-in;
-  /* background-color: blue; */
 }
 
 .lightbox.show {

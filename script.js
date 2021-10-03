@@ -32,7 +32,11 @@
       $(region).load(region.slice(1) + '.html');
       $(region).addClass('loaded');
     }
-    
+  });
+  
+  document.addEventListener("DOMContentLoaded", () => {
+    // If JS is enabled, then allow for dynamic resume preview without also downloading the resume by changing the hrefs to '#'
+    document.querySelectorAll(".resume-link").forEach(elem => elem.setAttribute("href", "#"));
   });
 
   $('#hifi_fake').one('load', function() {
@@ -73,3 +77,41 @@ fixBackgroundSizeCover();
 
 // Execute the fix function everytime on window resize
 window.addEventListener('resize', fixBackgroundSizeCover);
+
+const isMobile = () => 'ontouchstart' in document.documentElement;
+
+showLightbox = function() {
+  document.querySelector(".lightbox").classList.add("show");
+};
+
+hideLightbox = function() {
+  document.querySelector(".lightbox").classList.remove("show");
+};
+
+let resumeElementLoaded = false;
+
+showResumePdf = function(clickSource) {
+  if (isMobile()) {
+    document.location.href = "/resume.pdf";
+  } else {
+    showLightbox();
+    if (!resumeElementLoaded) {
+      const innerHTML = $(".lightbox").html();
+      // Dynamically load resume preview element so that resume pdf only loads when it's actually opened
+      // and to also fix an error message that comes up on Firefox after opening print preview due to Firefox's built-in pdf.js still loading pdf
+      $(".lightbox").load("resume.html", () => {
+        $(".lightbox").append(innerHTML);
+        resumeElementLoaded = true;
+      });
+    }
+  }
+  gtag('event', 'Opened Resume', {
+    event_label: clickSource,
+  });
+};
+
+window.addEventListener('keydown', (e) => {
+  if (e.key === "Escape") {
+    hideLightbox();
+  }
+});

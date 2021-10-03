@@ -53,7 +53,7 @@
       <ul class="main-menu">
         <li><a href="#home">home</a></li>
         <li><a href="#projects">projects</a></li>
-        <li><a href="resume.pdf">resume</a></li>
+        <li><a class="resume-link" href="/resume.pdf" onclick="showResumePdf('top-nav')">resume</a></li>
         <li><a href="https://www.linkedin.com/in/jamescoteh/">linkedin</a></li>
         <li><a href="https://github.com/Coteh">github</a></li>
         <li><a href="mailto:james.cote.730@gmail.com"><i class="material-icons">email</i></a></li>
@@ -65,25 +65,35 @@
         <div id="content"> 
           
           <div id="home" class="content-region show">
+            <div class="resume-preview">
+              <a class="resume-link" href="/resume.pdf" onclick="showResumePdf('thumbnail')">
+                <img src="/resume.png"/>
+                <i class="material-icons">open_in_full</i>
+              </a>
+            </div>
             <h2>Welcome</h2>
             <p>
               I am a recent graduate of the Computer Science program at the University of Guelph, and I am also a graduate of the Game Programming program at Humber College. I have been programming for about 9 years now, and for about 2 years professionally from my co-op work terms. I am eager to demonstrate my passion and experience in software development, solve challenging problems, and improve my skills.
             </p>
             <h2>Technical Skills</h2>
             <p>
-              <b>Proficient in:</b> JavaScript, Java, C, Python, Node.js, Express, Mocha <br/>
-              <b>Familiar with:</b> TypeScript, Go, C++, C#, HTML/CSS, React, PostgreSQL, MongoDB, Redis, JUnit, Mockito, Docker
+              <b>Proficient in:</b> JavaScript, TypeScript, HTML/CSS, Node.js, Express, React, Docker, Mocha <br/>
+              <b>Familiar with:</b> Go, C, C#, Java, Python, MongoDB, PostgreSQL, Redis
             </p>
           </div>
 
-          <div id="projects" class="content-region dynamic hide"/>
+          <div id="projects" class="content-region dynamic hide"></div>
+
+          <div class="lightbox">
+            <a class="close" href="#" onclick="hideLightbox()"><i class="material-icons">close</i></a>
+          </div>
           
         </div>
       </div>
     </div>
 
     <footer>  
-      &copy 2020 James Cote</a>
+      &copy 2020-2021 James Cote</a>
     </footer>
     
     <!-- Load additional JS scripts here -->

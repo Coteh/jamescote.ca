@@ -6,5 +6,6 @@ The latest version of my portfolio website. Based off of template provided by [z
 - Added Material Icons (currently, the Email icon is used)
 - Fixed background image changing size when scrollbar appears (adapted from [this StackOverflow solution](https://stackoverflow.com/a/48705670))
 - Lazy load a low resolution version of the background on initial page load for slow Internet connections, then transition to the original background once it's loaded ([#9](https://github.com/Coteh/coteh.github.io/pull/9))
+- Added a Lightbox for Resume PDF preview on desktop browsers (inspired by https://yossiabramov.com/blog/vanilla-js-lightbox) ([#16](https://github.com/Coteh/coteh.github.io/pull/16))
 
 ![Screenshot](screenshot.png "App Screenshot")

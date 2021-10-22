@@ -35,8 +35,12 @@
   });
   
   document.addEventListener("DOMContentLoaded", () => {
-    // If JS is enabled, then allow for dynamic resume preview without also downloading the resume by changing the hrefs to '#'
-    document.querySelectorAll(".resume-link").forEach(elem => elem.setAttribute("href", "#"));
+    // If JS is enabled, then allow for dynamic resume preview without also downloading the resume by preventing link from opening resume pdf
+    document.querySelectorAll(".resume-link").forEach(elem => {
+      elem.addEventListener("click", (e) => {
+        e.preventDefault();
+      });
+    });
   });
 
   $('#hifi_fake').one('load', function() {
@@ -101,6 +105,10 @@ showResumePdf = function(clickSource) {
       // and to also fix an error message that comes up on Firefox after opening print preview due to Firefox's built-in pdf.js still loading pdf
       $(".lightbox").load("resume.html", () => {
         $(".lightbox").append(innerHTML);
+        // Prevent lightbox close from forcing navigation to homepage if on another page (e.g. projects)
+        document.querySelector(".lightbox > .close").addEventListener("click", (e) => {
+          e.preventDefault();
+        });
         resumeElementLoaded = true;
       });
     }

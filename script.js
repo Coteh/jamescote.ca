@@ -69,8 +69,7 @@ showResumePdf = function(clickSource) {
   Stuff to run once page loads
 *********************************/
 
-// Wait for the document to load before running the script 
-(function ($) {
+document.addEventListener("DOMContentLoaded", () => {
   // We use some Javascript and the URL #fragment to hide/show different parts of the page
   // https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#Linking_to_an_element_on_the_same_page
   $(window).on('load hashchange', function(){
@@ -104,13 +103,11 @@ showResumePdf = function(clickSource) {
       $(region).addClass('loaded');
     }
   });
-  
-  document.addEventListener("DOMContentLoaded", () => {
-    // If JS is enabled, then allow for dynamic resume preview without also downloading the resume by preventing link from opening resume pdf
-    document.querySelectorAll(".resume-link").forEach(elem => {
-      elem.addEventListener("click", (e) => {
-        e.preventDefault();
-      });
+
+  // If JS is enabled, then allow for dynamic resume preview without also downloading the resume by preventing link from opening resume pdf
+  document.querySelectorAll(".resume-link").forEach(elem => {
+    elem.addEventListener("click", (e) => {
+      e.preventDefault();
     });
   });
 
@@ -134,4 +131,4 @@ showResumePdf = function(clickSource) {
       hideLightbox();
     }
   });
-})(jQuery);
+});

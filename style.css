@@ -163,46 +163,6 @@ ul.main-menu li a.active {
   width: 80%;
 }
 
-.resume-preview {
-  float: right;
-  margin: 2em;
-}
-.resume-preview > a {
-  position: relative;
-}
-.resume-preview > a:active,
-.resume-preview > a:focus {
-  outline: 0;
-  border: none;
-}
-.resume-preview > a > img {
-  height: 250px;
-  border: 2px solid rgba(0,0,0,0);
-  transition: border 0.5s;
-}
-@media only screen and (max-width: 1024px) {
-  .resume-preview > a > img {
-    height: 150px;
-  }
-}
-.resume-preview > a > i {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  margin: 0.5em;
-  color: black;
-}
-.resume-preview > a:hover > img {
-  border: 2px solid yellow;
-}
-.resume-preview > a:active > img,
-.resume-preview > a:focus > img {
-  border: 2px solid grey;
-}
-.resume-preview > a:hover > i {
-  color: grey;
-}
-
 /* Lightbox CSS */
 /* inspired by https://yossiabramov.com/blog/vanilla-js-lightbox */
 .lightbox {

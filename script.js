@@ -1,3 +1,74 @@
+/********************************
+  Variables
+*********************************/
+
+let resumeElementLoaded = false;
+
+/********************************
+  Functions
+*********************************/
+
+// Function to change background size "cover" to
+// either "100vw auto" (100 percent of viewport
+// width and automatic height)
+// or "auto 100vh" (automatic width and 100
+// percent of viewport height).
+// Adapted from StackOverflow post written by Perttu https://stackoverflow.com/a/48705670
+// Access Date: May 13, 2020
+fixBackgroundSizeCover = function (event) {
+  var bgImageWidth = 5142,
+    bgImageHeight = 3428,
+    bgImageRatio = bgImageWidth / bgImageHeight,
+    windowSizeRatio = window.innerWidth / window.innerHeight;
+
+  var bgWraps = document.getElementsByClassName('background_wrap');
+  if (bgImageRatio > windowSizeRatio) {
+    bgWraps[0].style.backgroundSize = 'auto 100vh';
+    bgWraps[1].style.backgroundSize = 'auto 100vh';
+  } else {
+    bgWraps[0].style.backgroundSize = '100vw auto';
+    bgWraps[1].style.backgroundSize = '100vw auto';
+  }
+};
+
+const isMobile = () => 'ontouchstart' in document.documentElement;
+
+showLightbox = function() {
+  document.querySelector(".lightbox").classList.add("show");
+};
+
+hideLightbox = function() {
+  document.querySelector(".lightbox").classList.remove("show");
+};
+
+showResumePdf = function(clickSource) {
+  if (isMobile()) {
+    document.location.href = "/resume.pdf";
+  } else {
+    showLightbox();
+    if (!resumeElementLoaded) {
+      const innerHTML = $(".lightbox").html();
+      // Dynamically load resume preview element so that resume pdf only loads when it's actually opened
+      // and to also fix an error message that comes up on Firefox after opening print preview due to Firefox's built-in pdf.js still loading pdf
+      $(".lightbox").load("resume.html", () => {
+        $(".lightbox").append(innerHTML);
+        // Prevent lightbox close from forcing navigation to homepage if on another page (e.g. projects)
+        document.querySelector(".lightbox > .close").addEventListener("click", (e) => {
+          e.preventDefault();
+        });
+        resumeElementLoaded = true;
+      });
+    }
+  }
+  gtag('event', 'Opened Resume', {
+    event_label: clickSource,
+  });
+};
+
+/********************************
+  Stuff to run once page loads
+*********************************/
+
 // Wait for the document to load before running the script 
 (function ($) {
   // We use some Javascript and the URL #fragment to hide/show different parts of the page
@@ -50,76 +121,17 @@
       $(this).trigger('load');
     }
   });
-  
-})(jQuery);
 
-// Function to change background size "cover" to
-// either "100vw auto" (100 percent of viewport
-// width and automatic height)
-// or "auto 100vh" (automatic width and 100
-// percent of viewport height).
-// Adapted from StackOverflow post written by Perttu https://stackoverflow.com/a/48705670
-// Access Date: May 13, 2020
-fixBackgroundSizeCover = function (event) {
-  var bgImageWidth = 5142,
-    bgImageHeight = 3428,
-    bgImageRatio = bgImageWidth / bgImageHeight,
-    windowSizeRatio = window.innerWidth / window.innerHeight;
+  // Execute the fix function once upon load
+  fixBackgroundSizeCover();
 
-  var bgWraps = document.getElementsByClassName('background_wrap');
-  if (bgImageRatio > windowSizeRatio) {
-    bgWraps[0].style.backgroundSize = 'auto 100vh';
-    bgWraps[1].style.backgroundSize = 'auto 100vh';
-  } else {
-    bgWraps[0].style.backgroundSize = '100vw auto';
-    bgWraps[1].style.backgroundSize = '100vw auto';
-  }
-};
+  // Execute the fix function everytime on window resize
+  window.addEventListener('resize', fixBackgroundSizeCover);
 
-// Execute the fix function once upon load
-fixBackgroundSizeCover();
-
-// Execute the fix function everytime on window resize
-window.addEventListener('resize', fixBackgroundSizeCover);
-
-const isMobile = () => 'ontouchstart' in document.documentElement;
-
-showLightbox = function() {
-  document.querySelector(".lightbox").classList.add("show");
-};
-
-hideLightbox = function() {
-  document.querySelector(".lightbox").classList.remove("show");
-};
-
-let resumeElementLoaded = false;
-
-showResumePdf = function(clickSource) {
-  if (isMobile()) {
-    document.location.href = "/resume.pdf";
-  } else {
-    showLightbox();
-    if (!resumeElementLoaded) {
-      const innerHTML = $(".lightbox").html();
-      // Dynamically load resume preview element so that resume pdf only loads when it's actually opened
-      // and to also fix an error message that comes up on Firefox after opening print preview due to Firefox's built-in pdf.js still loading pdf
-      $(".lightbox").load("resume.html", () => {
-        $(".lightbox").append(innerHTML);
-        // Prevent lightbox close from forcing navigation to homepage if on another page (e.g. projects)
-        document.querySelector(".lightbox > .close").addEventListener("click", (e) => {
-          e.preventDefault();
-        });
-        resumeElementLoaded = true;
-      });
+  // Exit resume preview by pressing Esc key
+  window.addEventListener('keydown', (e) => {
+    if (e.key === "Escape") {
+      hideLightbox();
     }
-  }
-  gtag('event', 'Opened Resume', {
-    event_label: clickSource,
   });
-};
-
-window.addEventListener('keydown', (e) => {
-  if (e.key === "Escape") {
-    hideLightbox();
-  }
-});
+})(jQuery);

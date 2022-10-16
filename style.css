@@ -162,6 +162,9 @@ ul.main-menu li a.active {
 .screenshot {
   width: 80%;
 }
+.screenshot.small {
+  width: 200px;
+}
 
 /* Lightbox CSS */
 /* inspired by https://yossiabramov.com/blog/vanilla-js-lightbox */

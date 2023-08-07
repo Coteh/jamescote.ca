@@ -3,6 +3,7 @@
 *********************************/
 
 let resumeElementLoaded = false;
+let osInstance = null;
 
 /********************************
   Functions
@@ -39,6 +40,13 @@ showLightbox = function() {
 
 hideLightbox = function() {
   document.querySelector(".lightbox").classList.remove("show");
+  if (osInstance) {
+    osInstance.options({
+      overflow: {
+        y: "scroll"
+      }
+    }, true);
+  }
 };
 
 showResumePdf = function(clickSource) {
@@ -59,6 +67,11 @@ showResumePdf = function(clickSource) {
         resumeElementLoaded = true;
       });
     }
+    osInstance.options({
+      overflow: {
+        y: "hidden"
+      }
+    }, true);
   }
   gtag('event', 'Opened Resume', {
     event_label: clickSource,
@@ -131,4 +144,13 @@ document.addEventListener("DOMContentLoaded", () => {
       hideLightbox();
     }
   });
+
+  // Use overlay scrollbars from OverlayScrollbars plugin if on desktop
+  if (!isMobile()) {
+    var { 
+      OverlayScrollbars 
+    } = OverlayScrollbarsGlobal;
+  
+    osInstance = OverlayScrollbars(document.querySelector('body'), {});
+  }
 });

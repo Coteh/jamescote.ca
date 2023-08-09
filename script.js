@@ -47,6 +47,7 @@ hideLightbox = function() {
       }
     }, true);
   }
+  document.body.style.overflow = "";
 };
 
 showResumePdf = function(clickSource) {
@@ -67,11 +68,14 @@ showResumePdf = function(clickSource) {
         resumeElementLoaded = true;
       });
     }
-    osInstance.options({
-      overflow: {
-        y: "hidden"
-      }
-    }, true);
+    if (osInstance) {
+      osInstance.options({
+        overflow: {
+          y: "hidden"
+        }
+      }, true);
+    }
+    document.body.style.overflow = "hidden";
   }
   gtag('event', 'Opened Resume', {
     event_label: clickSource,
@@ -146,7 +150,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // Use overlay scrollbars from OverlayScrollbars plugin if on desktop
-  if (!isMobile()) {
+  if (!isMobile() && typeof OverlayScrollbarsGlobal !== "undefined") {
     var { 
       OverlayScrollbars 
     } = OverlayScrollbarsGlobal;

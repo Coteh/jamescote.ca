@@ -52,7 +52,7 @@ hideLightbox = function() {
 
 showResumePdf = function(clickSource) {
   if (isMobile()) {
-    document.location.href = "/resume.pdf";
+    window.open("/resume.pdf", "_blank");
   } else {
     showLightbox();
     if (!resumeElementLoaded) {
